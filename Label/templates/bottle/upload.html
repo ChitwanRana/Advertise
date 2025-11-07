@@ -15,50 +15,47 @@
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">
-                  <i class="bi bi-building me-1"></i>{{ form.authorisation_name.label }}
-                </label>
-                {{ form.authorisation_name }}
-                {% if form.authorisation_name.errors %}
-                  <div class="text-danger small mt-1">{{ form.authorisation_name.errors }}</div>
-                {% endif %}
-              </div>
-              
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">
-                  <i class="bi bi-shield-check me-1"></i>{{ form.fssai_code.label }}
-                </label>
-                {{ form.fssai_code }}
-                <div class="form-text">14-digit FSSAI license number</div>
-                {% if form.fssai_code.errors %}
-                  <div class="text-danger small mt-1">{{ form.fssai_code.errors }}</div>
-                {% endif %}
-              </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-building me-1"></i>{{ form.authorisation_name.label }}
+              </label>
+              {{ form.authorisation_name }}
+              {% if form.authorisation_name.errors %}
+                <div class="text-danger small mt-1">{{ form.authorisation_name.errors }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-shield-check me-1"></i>{{ form.fssai_code.label }}
+              </label>
+              {{ form.fssai_code }}
+              <div class="form-text">14-digit FSSAI license number</div>
+              {% if form.fssai_code.errors %}
+                <div class="text-danger small mt-1">{{ form.fssai_code.errors }}</div>
+              {% endif %}
             </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">
-                  <i class="bi bi-calendar-event me-1"></i>{{ form.date_of_delivery.label }}
-                </label>
-                {{ form.date_of_delivery }}
-                {% if form.date_of_delivery.errors %}
-                  <div class="text-danger small mt-1">{{ form.date_of_delivery.errors }}</div>
-                {% endif %}
-              </div>
-              
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">
-                  <i class="bi bi-box-seam me-1"></i>{{ form.number_of_orders.label }}
-                </label>
-                {{ form.number_of_orders }}
-                <div class="form-text">How many bottles to label</div>
-                {% if form.number_of_orders.errors %}
-                  <div class="text-danger small mt-1">{{ form.number_of_orders.errors }}</div>
-                {% endif %}
-              </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-calendar-event me-1"></i>{{ form.date_of_delivery.label }}
+              </label>
+              {{ form.date_of_delivery }}
+              <div class="form-text">Select delivery date from calendar</div>
+              {% if form.date_of_delivery.errors %}
+                <div class="text-danger small mt-1">{{ form.date_of_delivery.errors }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-box-seam me-1"></i>{{ form.number_of_orders.label }}
+              </label>
+              {{ form.number_of_orders }}
+              <div class="form-text">How many bottles to label</div>
+              {% if form.number_of_orders.errors %}
+                <div class="text-danger small mt-1">{{ form.number_of_orders.errors }}</div>
+              {% endif %}
             </div>
 
             <div class="mb-3">

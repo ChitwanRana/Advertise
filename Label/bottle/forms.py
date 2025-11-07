@@ -69,15 +69,3 @@ class ReviewForm(forms.ModelForm):
             'rating': 'Rating (1-5 stars)',
             'feedback': 'Your Review',
         }
-from django import forms
-from .models import FSSAIEntry, Review
-
-class FSSAIEntryForm(forms.ModelForm):
-    class Meta:
-        model = FSSAIEntry
-        fields = ['fssai_code', 'authorisation_name', 'date_of_delivery', 'number_of_orders', 'logo', 'certificate']
-
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model = Review
-        fields = ['name', 'rating', 'feedback']
