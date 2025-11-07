@@ -1,0 +1,118 @@
+{% extends 'bottle/base.html' %}
+{% block title %}Welcome - Label Builder{% endblock %}
+
+{% block content %}
+  <div class="hero text-white mb-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-5 fw-bold mb-3">
+            <i class="bi bi-stars me-2"></i>Create Custom Bottle Labels from Your FSSAI Authorization
+          </h1>
+          <p class="lead mb-4">Upload your certificate and logo, preview beautiful label mockups with AI-generated design ideas, gather reviews, and iterate on your brand — all in one streamlined platform.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-light btn-lg shadow" href="{% url 'bottle:upload' %}">
+              <i class="bi bi-cloud-upload me-2"></i>Upload Your FSSAI
+            </a>
+            <a class="btn btn-outline-light btn-lg" href="{% url 'bottle:home' %}">
+              <i class="bi bi-collection me-2"></i>Browse Entries
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center mt-4 mt-lg-0">
+          <div class="p-4">
+            <i class="bi bi-file-earmark-check" style="font-size: 10rem; opacity: 0.9;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mb-5">
+    <div class="row g-4">
+      <!-- What It Does Section -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <h3 class="mb-3">
+              <i class="bi bi-info-circle text-primary me-2"></i>What This Platform Does
+            </h3>
+            <p class="mb-3">A streamlined tool designed for small food businesses to transform their FSSAI authorization into professional label concepts quickly and efficiently.</p>
+            <ul class="feature-list list-unstyled">
+              {% for f in features %}
+                <li class="mb-2">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>{{ f }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Start Section -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <h3 class="mb-3">
+              <i class="bi bi-rocket-takeoff text-primary me-2"></i>Quick Start Guide
+            </h3>
+            <ol class="ps-3">
+              <li class="mb-3">
+                <strong>Upload Your Details</strong><br>
+                <span class="text-muted small">Fill in FSSAI number, business name, and upload your logo and certificate</span>
+              </li>
+              <li class="mb-3">
+                <strong>Preview Label Designs</strong><br>
+                <span class="text-muted small">Instantly see your label mockup with AI-generated design suggestions</span>
+              </li>
+              <li class="mb-3">
+                <strong>Gather Feedback</strong><br>
+                <span class="text-muted small">Share with your team and collect reviews to refine your branding</span>
+              </li>
+              <li class="mb-3">
+                <strong>Finalize & Download</strong><br>
+                <span class="text-muted small">Export your certificate and use the label ideas for production</span>
+              </li>
+            </ol>
+            <div class="alert alert-info mb-0">
+              <i class="bi bi-lightbulb me-2"></i>
+              <small><strong>Note:</strong> Files are stored locally for development. Configure cloud storage for production use.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row g-4 mt-4">
+      <div class="col-md-4">
+        <div class="card text-center h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="bi bi-lightning-charge text-warning" style="font-size: 3rem;"></i>
+            <h5 class="mt-3 mb-2">Fast & Simple</h5>
+            <p class="text-muted mb-0">Upload once and get instant label preview with design ideas</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="bi bi-palette text-primary" style="font-size: 3rem;"></i>
+            <h5 class="mt-3 mb-2">AI-Powered Ideas</h5>
+            <p class="text-muted mb-0">Get creative label design suggestions automatically</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="bi bi-people text-success" style="font-size: 3rem;"></i>
+            <h5 class="mt-3 mb-2">Team Feedback</h5>
+            <p class="text-muted mb-0">Collect reviews and iterate on your branding together</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

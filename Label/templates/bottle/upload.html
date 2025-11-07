@@ -1,0 +1,99 @@
+{% extends 'bottle/base.html' %}
+{% block title %}Upload FSSAI - Label Builder{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="bi bi-cloud-upload text-primary" style="font-size: 3rem;"></i>
+            <h2 class="h4 mt-3 mb-2">Upload FSSAI Authorization</h2>
+            <p class="text-muted">Fill in your details and upload your logo to generate label preview</p>
+          </div>
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-building me-1"></i>{{ form.authorisation_name.label }}
+                </label>
+                {{ form.authorisation_name }}
+                {% if form.authorisation_name.errors %}
+                  <div class="text-danger small mt-1">{{ form.authorisation_name.errors }}</div>
+                {% endif %}
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-shield-check me-1"></i>{{ form.fssai_code.label }}
+                </label>
+                {{ form.fssai_code }}
+                <div class="form-text">14-digit FSSAI license number</div>
+                {% if form.fssai_code.errors %}
+                  <div class="text-danger small mt-1">{{ form.fssai_code.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-calendar-event me-1"></i>{{ form.date_of_delivery.label }}
+                </label>
+                {{ form.date_of_delivery }}
+                {% if form.date_of_delivery.errors %}
+                  <div class="text-danger small mt-1">{{ form.date_of_delivery.errors }}</div>
+                {% endif %}
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-box-seam me-1"></i>{{ form.number_of_orders.label }}
+                </label>
+                {{ form.number_of_orders }}
+                <div class="form-text">How many bottles to label</div>
+                {% if form.number_of_orders.errors %}
+                  <div class="text-danger small mt-1">{{ form.number_of_orders.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-image me-1"></i>{{ form.logo.label }}
+              </label>
+              {{ form.logo }}
+              <div class="form-text">Upload your brand logo (PNG, JPG, or SVG recommended)</div>
+              {% if form.logo.errors %}
+                <div class="text-danger small mt-1">{{ form.logo.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">
+                <i class="bi bi-file-earmark-pdf me-1"></i>{{ form.certificate.label }}
+              </label>
+              {{ form.certificate }}
+              <div class="form-text">Upload your FSSAI certificate (PDF or image)</div>
+              {% if form.certificate.errors %}
+                <div class="text-danger small mt-1">{{ form.certificate.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-check-circle me-2"></i>Submit & Preview Label
+              </button>
+              <a href="{% url 'bottle:home' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to Entries
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

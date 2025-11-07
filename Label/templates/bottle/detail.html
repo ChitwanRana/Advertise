@@ -1,0 +1,167 @@
+{% extends 'bottle/base.html' %}
+{% block title %}Preview - {{ entry.authorisation_name }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Entry Info Card -->
+      <div class="card mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-start">
+            <div class="me-4">
+              {% if entry.logo %}
+                <img src="{{ entry.logo.url }}" class="logo-thumb" alt="logo" style="max-width: 140px; max-height: 140px;">
+              {% else %}
+                <div class="logo-thumb d-flex align-items-center justify-content-center bg-light" style="width: 140px; height: 140px;">
+                  <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                </div>
+              {% endif %}
+            </div>
+            <div class="flex-grow-1">
+              <h3 class="mb-2">{{ entry.authorisation_name }}</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <p class="mb-2">
+                    <i class="bi bi-shield-check text-primary me-2"></i>
+                    <strong>FSSAI:</strong> {{ entry.fssai_code }}
+                  </p>
+                  <p class="mb-2">
+                    <i class="bi bi-box-seam text-primary me-2"></i>
+                    <strong>Bottles:</strong> {{ entry.number_of_orders }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p class="mb-2">
+                    <i class="bi bi-calendar-event text-primary me-2"></i>
+                    <strong>Delivery:</strong> {{ entry.date_of_delivery }}
+                  </p>
+                  <p class="mb-2">
+                    <i class="bi bi-clock text-primary me-2"></i>
+                    <strong>Submitted:</strong> {{ entry.submitted_at|date:"M d, Y" }}
+                  </p>
+                </div>
+              </div>
+              {% if entry.certificate %}
+                <a href="{{ entry.certificate.url }}" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
+                  <i class="bi bi-download me-2"></i>Download Certificate
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Label Preview Card -->
+      <div class="card mb-4">
+        <div class="card-body p-4">
+          <h5 class="mb-3">
+            <i class="bi bi-palette text-primary me-2"></i>Label Preview
+          </h5>
+          <div class="label-preview my-3">
+            <div class="d-flex align-items-center">
+              <div style="flex:0 0 160px;">
+                {% if entry.logo %}
+                  <img src="{{ entry.logo.url }}" alt="logo" style="max-width:140px; border-radius: 8px;">
+                {% else %}
+                  <div class="bg-light rounded p-3 text-center">
+                    <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="ms-4">
+                <h2 class="mb-2" style="color: #1f2937;">{{ entry.authorisation_name }}</h2>
+                <p class="mb-1 text-muted">FSSAI License: {{ entry.fssai_code }}</p>
+                <p class="mb-0 small text-muted">Quality assured and certified</p>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="mt-4 mb-3">
+            <i class="bi bi-lightbulb text-warning me-2"></i>AI-Generated Design Ideas
+          </h6>
+          <div class="row g-3">
+            {% for idea in ideas %}
+              <div class="col-12">
+                <div class="p-3 border rounded" style="background: linear-gradient(135deg, #fef3f2 0%, #fefefe 100%);">
+                  <div class="d-flex">
+                    <i class="bi bi-stars text-warning me-3" style="font-size: 1.5rem;"></i>
+                    <p class="mb-0">{{ idea }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews Card -->
+      <div class="card">
+        <div class="card-body p-4">
+          <h5 class="mb-3">
+            <i class="bi bi-chat-left-quote text-primary me-2"></i>Reviews & Feedback
+          </h5>
+          {% include 'bottle/_reviews.html' %}
+
+          <hr class="my-4">
+          <h6 class="mb-3">
+            <i class="bi bi-pencil-square text-primary me-2"></i>Leave a Review
+          </h6>
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">{{ review_form.name.label }}</label>
+                {{ review_form.name }}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">{{ review_form.rating.label }}</label>
+                {{ review_form.rating }}
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ review_form.feedback.label }}</label>
+              {{ review_form.feedback }}
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-send me-2"></i>Submit Review
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="mb-3">
+            <i class="bi bi-gear text-primary me-2"></i>Quick Actions
+          </h6>
+          <div class="d-grid gap-2">
+            <a class="btn btn-outline-primary" href="{% url 'bottle:upload' %}">
+              <i class="bi bi-plus-circle me-2"></i>Upload Another
+            </a>
+            <a class="btn btn-outline-secondary" href="{% url 'bottle:home' %}">
+              <i class="bi bi-arrow-left me-2"></i>Back to All Entries
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-light">
+        <div class="card-body">
+          <h6 class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>Next Steps
+          </h6>
+          <ul class="small mb-0 ps-3">
+            <li class="mb-2">Download and review your certificate</li>
+            <li class="mb-2">Share this preview with your team</li>
+            <li class="mb-2">Gather feedback from reviewers</li>
+            <li>Finalize your label design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
